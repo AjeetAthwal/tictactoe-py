@@ -1,4 +1,7 @@
-- Added basic tictactoe game
+-   Added basic tictactoe game in folder "basic_game"
+-   Added GUI in folder "tkinter_game"
 
-Improvements to be made
-- incorporate tkinter (learn tkinter)
+Potential Improvements:
+
+-   Add a scoreboard to tkinter (tallies W,D,L)
+-   Add option to add a name
