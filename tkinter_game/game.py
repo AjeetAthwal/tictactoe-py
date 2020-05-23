@@ -32,10 +32,14 @@ def win(board):
 
 
 turn = "X"
+x_counter = 0
+o_counter = 0
 
 
 def calculate(row, column):
     global turn
+    global x_counter
+    global o_counter
     if board[row][column].get() == "" and not win(board):
         board[row][column].set(turn)
         if turn == "X" and not win(board):
@@ -45,6 +49,12 @@ def calculate(row, column):
         turn_text.set(f"{turn}'s turn to make a move")
     if win(board):
         turn_text.set(f"{turn} wins!")
+        if turn == "X":
+            x_counter += 1
+        else:
+            o_counter += 1
+        x_text.set(f"X: {x_counter}")
+        o_text.set(f"O: {o_counter}")
 
 
 def clear_board():
@@ -79,5 +89,14 @@ for row_index in range(1, 4):
 ttk.Label(mainframe).grid(column=2, row=5)
 ttk.Button(mainframe, text="Reset Game", command=clear_board).grid(
     column=1, row=6, columnspan=3, sticky=W+E+N+S)
+
+x_text = StringVar()
+o_text = StringVar()
+ttk.Label(mainframe, textvariable=x_text).grid(
+    column=6, row=2)
+x_text.set(f"X: {x_counter}")
+ttk.Label(mainframe, textvariable=o_text).grid(
+    column=6, row=3)
+o_text.set(f"O: {o_counter}")
 
 root.mainloop()
