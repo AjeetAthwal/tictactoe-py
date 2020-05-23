@@ -31,6 +31,14 @@ def win(board):
     return hor_win(board) or vert_win(board) or diag_win(board)
 
 
+def empty_spaces(board):
+    for row in range(3):
+        for column in range(3):
+            if board[row][column].get() == "":
+                return True
+    return False
+
+
 turn = "X"
 x_counter = 0
 o_counter = 0
@@ -48,13 +56,15 @@ def calculate(row, column):
             turn = "X"
         turn_text.set(f"{turn}'s turn to make a move")
     if win(board):
-        turn_text.set(f"{turn} wins!")
-        if turn == "X":
+        if turn == "X" and turn_text.get() != "X wins!":
             x_counter += 1
-        else:
+        elif turn == "O" and turn_text.get() != "O wins!":
             o_counter += 1
+        turn_text.set(f"{turn} wins!")
         x_text.set(f"X: {x_counter}")
         o_text.set(f"O: {o_counter}")
+    elif not win(board) and not empty_spaces(board):
+        turn_text.set("Draw!")
 
 
 def clear_board():
